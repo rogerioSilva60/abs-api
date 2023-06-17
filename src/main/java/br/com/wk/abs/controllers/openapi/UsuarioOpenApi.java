@@ -12,11 +12,12 @@ import org.springframework.http.ResponseEntity;
 @Tag(name = "Usuário", description = "Serviços relacionado ao usuário")
 public interface UsuarioOpenApi {
 
-  @Operation(summary = "Salvar um lote de usuários", description = "Deve salvar um lote de usuários")
+  @Operation(summary = "Salvar um lote de usuários", description = "Deve salvar um lote de usuários, "
+      + "Obs: caso retorne status 204 significa que o lote foi salvo.")
   @ApiResponses(
       value = {
           @ApiResponse(
-              responseCode = "201", description = "Usuário cadastrado", content = @Content
+              responseCode = "204", description = "Nenhum conteúdo", content = @Content
           ),
           @ApiResponse (
               responseCode = "400", description = "Requisição inválida", content = @Content

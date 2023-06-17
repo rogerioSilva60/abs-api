@@ -24,7 +24,7 @@ public class UsuarioRequestDTO implements Serializable {
 
   private String rg;
 
-  @Schema(example = "17/06/2023")
+  @Schema(type = "string", pattern = "dd/MM/yyyy", example = "17/02/2020")
   @JsonProperty(value = "data_nasc")
   private LocalDate dataNascimento;
 
