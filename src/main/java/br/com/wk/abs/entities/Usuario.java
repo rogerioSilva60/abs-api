@@ -32,7 +32,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 @NoArgsConstructor
 @Entity
 @Table(name = "usuario",
-    uniqueConstraints = { @UniqueConstraint( name = "unique_users_email", columnNames = { "email" }) })
+    uniqueConstraints = { @UniqueConstraint( name = "unique_usuario_email", columnNames = { "email" }) })
 public class Usuario implements Serializable {
 
   @Serial
