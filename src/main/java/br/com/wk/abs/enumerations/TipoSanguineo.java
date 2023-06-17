@@ -2,9 +2,11 @@ package br.com.wk.abs.enumerations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.Arrays;
 import org.springframework.util.ObjectUtils;
 
+@Schema(type = "string", allowableValues = { "A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-" })
 public enum TipoSanguineo {
 
   A_POSITIVO("A+"),

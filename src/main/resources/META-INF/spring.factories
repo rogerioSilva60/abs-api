@@ -1,0 +1,2 @@
+# Configuração automática
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\br.com.wk.abs.config.DateTimeAutoConfig

@@ -21,7 +21,7 @@ public class UsuarioServiceImpl implements UsuarioService {
   public void salvarEmLote(List<Usuario> usuarios) {
     log.info("Salvando usuarios em lote...");
     repository.salvarEmLote(usuarios);
-    log.info(String.format("Usuarios em lote salvos, total: %s", usuarios.size()));
+    log.info(String.format("Lote de usuarios salvos, total: %s", usuarios.size()));
   }
 
 }

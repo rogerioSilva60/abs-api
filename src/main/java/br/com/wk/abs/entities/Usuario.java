@@ -43,21 +43,26 @@ public class Usuario implements Serializable {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
+  @Column(nullable = false)
   private String nome;
 
+  @Column(nullable = false, length = 14)
   private String cpf;
 
+  @Column(nullable = false, length = 12)
   private String rg;
 
-  @Column(name = "data_nascimento")
+  @Column(name = "data_nascimento", nullable = false)
   private LocalDate dataNascimento;
 
   @Enumerated(EnumType.STRING)
   @Column(nullable = false)
   private Genero genero;
 
+  @Column(nullable = false)
   private String mae;
 
+  @Column(nullable = false)
   private String pai;
 
   @Column(nullable = false)
@@ -66,13 +71,16 @@ public class Usuario implements Serializable {
   @Embedded
   private Endereco endereco;
 
-  @Column(name = "telefone_fixo")
+  @Column(name = "telefone_fixo", nullable = false, length = 14)
   private String telefoneFixo;
 
+  @Column(nullable = false, length = 15)
   private String celular;
 
+  @Column(nullable = false)
   private Double altura;
 
+  @Column(nullable = false)
   private Integer peso;
 
   @Enumerated(EnumType.STRING)

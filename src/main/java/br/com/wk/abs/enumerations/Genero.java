@@ -2,9 +2,11 @@ package br.com.wk.abs.enumerations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.Arrays;
 import org.springframework.util.ObjectUtils;
 
+@Schema(type = "string", allowableValues = { "Masculino", "Feminino" })
 public enum Genero {
 
   MASCULINO("Masculino"),
