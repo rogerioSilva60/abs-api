@@ -14,11 +14,11 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long>, Usuario
   List<CandidatoVO> buscarAgrupadoPorEstado();
 
   @Query("select new br.com.wk.abs.vo.UsuarioImcVO(u.nome, datediff(yy, u.dataNascimento, current_date) as idade, "
-      + "((u.peso/u.altura)*2) as imc) from Usuario u order by datediff(yy, u.dataNascimento, current_date) asc")
+      + "(u.peso/(u.altura * u.altura)) as imc) from Usuario u order by datediff(yy, u.dataNascimento, current_date) asc")
   List<UsuarioImcVO> buscarIMCPorUsuario();
 
   @Query("select new br.com.wk.abs.vo.UsuarioImcVO(datediff(yy, u.dataNascimento, current_date) as idade, "
-      + "((u.peso/u.altura)*2) as imc) from Usuario u where datediff(yy, u.dataNascimento, current_date) between ?1 and ?2 "
+      + "(u.peso/(u.altura * u.altura)) as imc) from Usuario u where datediff(yy, u.dataNascimento, current_date) between ?1 and ?2 "
       + "order by datediff(yy, u.dataNascimento, current_date) asc")
   List<UsuarioImcVO> buscarIMCPorIdade(int menroIdade, int maiorIdade);
 
