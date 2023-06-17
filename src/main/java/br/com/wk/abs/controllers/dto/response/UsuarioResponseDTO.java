@@ -3,11 +3,13 @@ package br.com.wk.abs.controllers.dto.response;
 import br.com.wk.abs.entities.Endereco;
 import br.com.wk.abs.enumerations.Genero;
 import br.com.wk.abs.enumerations.TipoSanguineo;
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
 import lombok.Data;
 
+@Schema(name = "Usuario saída")
 @Data
 public class UsuarioResponseDTO implements Serializable {
 

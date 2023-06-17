@@ -1,6 +1,7 @@
 package br.com.wk.abs.controllers;
 
 import br.com.wk.abs.controllers.dto.request.UsuarioRequestDTO;
+import br.com.wk.abs.controllers.dto.response.CandidatoResponseDTO;
 import br.com.wk.abs.controllers.mapper.UsuarioMapper;
 import br.com.wk.abs.controllers.openapi.UsuarioOpenApi;
 import br.com.wk.abs.entities.Usuario;
@@ -9,6 +10,7 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +37,15 @@ public class UsuarioController implements UsuarioOpenApi {
     service.salvarEmLote(usuarios);
 
     return ResponseEntity.noContent().build();
+  }
+
+  @GetMapping("agrupado-por-estado")
+  @Override
+  public ResponseEntity<List<CandidatoResponseDTO>> buscarAgrupadoPorEstado() {
+    List<CandidatoResponseDTO> candidatos = service.buscarAgrupadoPorEstado().stream()
+        .map(mapper::toCandidatoResponseDTO)
+        .toList();
+    return ResponseEntity.ok(candidatos);
   }
 
 }

@@ -1,6 +1,7 @@
 package br.com.wk.abs.controllers.openapi;
 
 import br.com.wk.abs.controllers.dto.request.UsuarioRequestDTO;
+import br.com.wk.abs.controllers.dto.response.CandidatoResponseDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -29,4 +30,16 @@ public interface UsuarioOpenApi {
   )
   ResponseEntity<Void> salvarEmLote(List<UsuarioRequestDTO> usuarioRequestDTOS);
 
+  @Operation(summary = "Agrupar candidatos por estado", description = "Deve retornar todos os candidatos agrupados por estado")
+  @ApiResponses(
+      value = {
+          @ApiResponse(
+              responseCode = "200", description = "Ok", content = @Content
+          ),
+          @ApiResponse (
+              responseCode = "500", description = "Ocorreu erro interno", content = @Content
+          )
+      }
+  )
+  ResponseEntity<List<CandidatoResponseDTO>> buscarAgrupadoPorEstado();
 }

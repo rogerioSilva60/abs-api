@@ -1,8 +1,10 @@
 package br.com.wk.abs.controllers.mapper;
 
 import br.com.wk.abs.controllers.dto.request.UsuarioRequestDTO;
+import br.com.wk.abs.controllers.dto.response.CandidatoResponseDTO;
 import br.com.wk.abs.controllers.dto.response.UsuarioResponseDTO;
 import br.com.wk.abs.entities.Usuario;
+import br.com.wk.abs.vo.CandidatoVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants.ComponentModel;
@@ -23,5 +25,7 @@ public interface UsuarioMapper {
   Usuario toUsuario(UsuarioRequestDTO usuarioRequestDTO);
 
   UsuarioResponseDTO toUsuarioResponseDTO(UsuarioResponseDTO usuarioResponseDTO);
+
+  CandidatoResponseDTO toCandidatoResponseDTO(CandidatoVO candidatoVO);
 
 }
