@@ -2,6 +2,7 @@ package br.com.wk.abs.controllers;
 
 import br.com.wk.abs.controllers.dto.request.UsuarioRequestDTO;
 import br.com.wk.abs.controllers.dto.response.CandidatoResponseDTO;
+import br.com.wk.abs.controllers.dto.response.FaixaEtariaResponseDTO;
 import br.com.wk.abs.controllers.mapper.UsuarioMapper;
 import br.com.wk.abs.controllers.openapi.UsuarioOpenApi;
 import br.com.wk.abs.entities.Usuario;
@@ -47,5 +48,17 @@ public class UsuarioController implements UsuarioOpenApi {
         .toList();
     return ResponseEntity.ok(candidatos);
   }
+
+  @GetMapping("imc-faixa-etaria-dez-em-dez-anos")
+  @Override
+  public ResponseEntity<List<FaixaEtariaResponseDTO>> buscarMediaImcPorFaixaEtariaDeDezEmDezAnos() {
+    List<FaixaEtariaResponseDTO> faixaEtarias = service.buscarMediaImcPorFaixaEtariaDeDezEmDezAnos()
+        .stream()
+        .map(mapper::toFaixaEtariaResponseDTO)
+        .toList();
+
+    return ResponseEntity.ok(faixaEtarias);
+  }
+
 
 }

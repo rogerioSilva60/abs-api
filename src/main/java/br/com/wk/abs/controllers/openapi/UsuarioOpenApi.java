@@ -2,6 +2,7 @@ package br.com.wk.abs.controllers.openapi;
 
 import br.com.wk.abs.controllers.dto.request.UsuarioRequestDTO;
 import br.com.wk.abs.controllers.dto.response.CandidatoResponseDTO;
+import br.com.wk.abs.controllers.dto.response.FaixaEtariaResponseDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -42,4 +43,17 @@ public interface UsuarioOpenApi {
       }
   )
   ResponseEntity<List<CandidatoResponseDTO>> buscarAgrupadoPorEstado();
+
+  @Operation(summary = "Media Imc por faixa etária", description = "Deve retornar o IMC de todas as faixas etárias de dez em dez anos")
+  @ApiResponses(
+      value = {
+          @ApiResponse(
+              responseCode = "200", description = "Ok", content = @Content
+          ),
+          @ApiResponse (
+              responseCode = "500", description = "Ocorreu erro interno", content = @Content
+          )
+      }
+  )
+  ResponseEntity<List<FaixaEtariaResponseDTO>> buscarMediaImcPorFaixaEtariaDeDezEmDezAnos();
 }
