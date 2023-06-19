@@ -1,6 +1,7 @@
 package br.com.wk.abs.services.impl;
 
 import br.com.wk.abs.entities.Usuario;
+import br.com.wk.abs.enumerations.Genero;
 import br.com.wk.abs.repositories.UsuarioRepository;
 import br.com.wk.abs.services.UsuarioService;
 import br.com.wk.abs.services.exceptions.NotFoundException;
@@ -10,7 +11,9 @@ import br.com.wk.abs.vo.UsuarioImcVO;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -68,6 +71,32 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     log.info("Busca media IMC por periodo de dez em dez anos finalizado");
     return lista;
+  }
+
+  public Map<Genero, BigDecimal> buscarPercentualDeObesosPorGenero() {
+    log.info("Busca de percentual de obesos por genero iniciado...");
+    List<UsuarioImcVO> usuariosMasculinoImc = repository.buscarIMCDoUsuarioPorGenero(Genero.MASCULINO);
+    List<UsuarioImcVO> usuariosFemininoImc = repository.buscarIMCDoUsuarioPorGenero(Genero.FEMININO);
+
+    List<UsuarioImcVO> usuariosMasculinoObesos = usuariosMasculinoImc.stream()
+        .filter(usuarioImcVO -> usuarioImcVO.getImc() > 30)
+        .toList();
+    List<UsuarioImcVO> usuariosFemininoObesos = usuariosFemininoImc.stream()
+        .filter(usuarioImcVO -> usuarioImcVO.getImc() > 30)
+        .toList();
+
+    double percentualMasculino = ((double) (usuariosMasculinoObesos.size() * 100) / usuariosMasculinoImc.size());
+    double percentualFeminino = ((double) (usuariosFemininoObesos.size() * 100) / usuariosFemininoImc.size());
+
+    Map<Genero, BigDecimal> mapRestultado = new HashMap<>();
+    mapRestultado.put(Genero.MASCULINO, BigDecimal.valueOf(percentualMasculino)
+        .setScale(2, RoundingMode.HALF_UP));
+    mapRestultado.put(Genero.FEMININO, BigDecimal.valueOf(percentualFeminino)
+        .setScale(2, RoundingMode.HALF_UP));
+
+    log.info("Busca de percentual de obesos por genero finalizado");
+
+    return mapRestultado;
   }
 
 }

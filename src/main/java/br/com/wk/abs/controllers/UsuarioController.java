@@ -6,8 +6,11 @@ import br.com.wk.abs.controllers.dto.response.FaixaEtariaResponseDTO;
 import br.com.wk.abs.controllers.mapper.UsuarioMapper;
 import br.com.wk.abs.controllers.openapi.UsuarioOpenApi;
 import br.com.wk.abs.entities.Usuario;
+import br.com.wk.abs.enumerations.Genero;
 import br.com.wk.abs.services.UsuarioService;
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -60,5 +63,9 @@ public class UsuarioController implements UsuarioOpenApi {
     return ResponseEntity.ok(faixaEtarias);
   }
 
-
+  @GetMapping("percentual-obeso-por-genero")
+  public ResponseEntity<Map<Genero, BigDecimal>> buscarPercentualObeso() {
+    Map<Genero, BigDecimal> generoObesoImcVOMap = service.buscarPercentualDeObesosPorGenero();
+    return ResponseEntity.ok(generoObesoImcVOMap);
+  }
 }

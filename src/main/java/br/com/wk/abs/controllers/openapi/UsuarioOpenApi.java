@@ -3,12 +3,18 @@ package br.com.wk.abs.controllers.openapi;
 import br.com.wk.abs.controllers.dto.request.UsuarioRequestDTO;
 import br.com.wk.abs.controllers.dto.response.CandidatoResponseDTO;
 import br.com.wk.abs.controllers.dto.response.FaixaEtariaResponseDTO;
+import br.com.wk.abs.enumerations.Genero;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
 @Tag(name = "Usuário", description = "Serviços relacionado ao usuário")
@@ -35,7 +41,13 @@ public interface UsuarioOpenApi {
   @ApiResponses(
       value = {
           @ApiResponse(
-              responseCode = "200", description = "Ok", content = @Content
+              responseCode = "200", description = "Ok",
+              content = {
+                  @Content(
+                      mediaType = MediaType.APPLICATION_JSON_VALUE,
+                      array = @ArraySchema( schema = @Schema(implementation = CandidatoResponseDTO.class))
+                  )
+              }
           ),
           @ApiResponse (
               responseCode = "500", description = "Ocorreu erro interno", content = @Content
@@ -48,7 +60,13 @@ public interface UsuarioOpenApi {
   @ApiResponses(
       value = {
           @ApiResponse(
-              responseCode = "200", description = "Ok", content = @Content
+              responseCode = "200", description = "Ok",
+              content = {
+                  @Content(
+                    mediaType = MediaType.APPLICATION_JSON_VALUE,
+                    array = @ArraySchema( schema = @Schema(implementation = FaixaEtariaResponseDTO.class))
+                  )
+              }
           ),
           @ApiResponse (
               responseCode = "500", description = "Ocorreu erro interno", content = @Content
@@ -56,4 +74,23 @@ public interface UsuarioOpenApi {
       }
   )
   ResponseEntity<List<FaixaEtariaResponseDTO>> buscarMediaImcPorFaixaEtariaDeDezEmDezAnos();
+
+  @Operation(summary = "Percutal de obesos por gênero", description = "Deve retornar o percentual de obeso por gênero")
+  @ApiResponses(
+      value = {
+          @ApiResponse(
+              responseCode = "200", description = "Ok",
+              content = {
+                  @Content(
+                      mediaType = MediaType.APPLICATION_JSON_VALUE,
+                      schema = @Schema(implementation = Map.class)
+                  )
+              }
+          ),
+          @ApiResponse (
+              responseCode = "500", description = "Ocorreu erro interno", content = @Content
+          )
+      }
+  )
+  ResponseEntity<Map<Genero, BigDecimal>> buscarPercentualObeso();
 }
