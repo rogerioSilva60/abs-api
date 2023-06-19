@@ -4,6 +4,7 @@ import br.com.wk.abs.entities.Usuario;
 import br.com.wk.abs.enumerations.Genero;
 import br.com.wk.abs.repositories.queries.UsuarioRepositoryQuery;
 import br.com.wk.abs.vo.CandidatoVO;
+import br.com.wk.abs.vo.GrupoSanguineoVO;
 import br.com.wk.abs.vo.UsuarioImcVO;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -27,6 +28,10 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long>, Usuario
       + "(u.peso/(u.altura * u.altura)) as imc) from Usuario u where datediff(yy, u.dataNascimento, current_date) between ?1 and ?2 "
       + "order by datediff(yy, u.dataNascimento, current_date) asc")
   List<UsuarioImcVO> buscarIMCPorIdade(int menroIdade, int maiorIdade);
+
+  @Query("select new br.com.wk.abs.vo.GrupoSanguineoVO(u.tipoSanguineo, (sum(datediff(yy, u.dataNascimento, current_date)) / count(u.tipoSanguineo))) from Usuario u "
+      + "group by u.tipoSanguineo order by u.tipoSanguineo asc")
+  List<GrupoSanguineoVO> buscarMediaIdadePorTipoSanguineo();
 
   @Query("select max(datediff(yy, u.dataNascimento, current_date)) as maior_idade from Usuario u")
   Integer buscarMaiorIdade();

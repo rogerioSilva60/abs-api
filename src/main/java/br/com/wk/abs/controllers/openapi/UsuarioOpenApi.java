@@ -3,6 +3,7 @@ package br.com.wk.abs.controllers.openapi;
 import br.com.wk.abs.controllers.dto.request.UsuarioRequestDTO;
 import br.com.wk.abs.controllers.dto.response.CandidatoResponseDTO;
 import br.com.wk.abs.controllers.dto.response.FaixaEtariaResponseDTO;
+import br.com.wk.abs.controllers.dto.response.GrupoSanguineoResponseDTO;
 import br.com.wk.abs.enumerations.Genero;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -75,7 +76,7 @@ public interface UsuarioOpenApi {
   )
   ResponseEntity<List<FaixaEtariaResponseDTO>> buscarMediaImcPorFaixaEtariaDeDezEmDezAnos();
 
-  @Operation(summary = "Percutal de obesos por gênero", description = "Deve retornar o percentual de obeso por gênero")
+  @Operation(summary = "Percentual de obesos por gênero", description = "Deve retornar o percentual de obeso por gênero")
   @ApiResponses(
       value = {
           @ApiResponse(
@@ -93,4 +94,23 @@ public interface UsuarioOpenApi {
       }
   )
   ResponseEntity<Map<Genero, BigDecimal>> buscarPercentualObeso();
+
+  @Operation(summary = "Media idade por grupo sanguineo", description = "Deve retornar a media de idade por grupo sanguineo")
+  @ApiResponses(
+      value = {
+          @ApiResponse(
+              responseCode = "200", description = "Ok",
+              content = {
+                  @Content(
+                      mediaType = MediaType.APPLICATION_JSON_VALUE,
+                      array = @ArraySchema( schema = @Schema(implementation = GrupoSanguineoResponseDTO.class))
+                  )
+              }
+          ),
+          @ApiResponse (
+              responseCode = "500", description = "Ocorreu erro interno", content = @Content
+          )
+      }
+  )
+  ResponseEntity<List<GrupoSanguineoResponseDTO>> buscarMediaIdadeDoTipoSanguineo();
 }

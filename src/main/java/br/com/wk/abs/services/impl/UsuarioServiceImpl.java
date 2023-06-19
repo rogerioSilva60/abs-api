@@ -7,6 +7,7 @@ import br.com.wk.abs.services.UsuarioService;
 import br.com.wk.abs.services.exceptions.NotFoundException;
 import br.com.wk.abs.vo.CandidatoVO;
 import br.com.wk.abs.vo.FaixaEtariaVO;
+import br.com.wk.abs.vo.GrupoSanguineoVO;
 import br.com.wk.abs.vo.UsuarioImcVO;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -34,6 +35,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     log.info(String.format("Lote de usuarios salvos, total: %s", usuarios.size()));
   }
 
+  @Transactional(readOnly = true)
   @Override
   public List<CandidatoVO> buscarAgrupadoPorEstado() {
     log.info("Busca dos candidatos agrupados por estado iniciado...");
@@ -73,6 +75,8 @@ public class UsuarioServiceImpl implements UsuarioService {
     return lista;
   }
 
+  @Transactional(readOnly = true)
+  @Override
   public Map<Genero, BigDecimal> buscarPercentualDeObesosPorGenero() {
     log.info("Busca de percentual de obesos por genero iniciado...");
     List<UsuarioImcVO> usuariosMasculinoImc = repository.buscarIMCDoUsuarioPorGenero(Genero.MASCULINO);
@@ -97,6 +101,15 @@ public class UsuarioServiceImpl implements UsuarioService {
     log.info("Busca de percentual de obesos por genero finalizado");
 
     return mapRestultado;
+  }
+
+  @Transactional(readOnly = true)
+  @Override
+  public List<GrupoSanguineoVO> buscarMediaIdadePorTipoSanguineo() {
+    log.info("Busca dmedia de idades por tipo sanguineo iniciado...");
+    List<GrupoSanguineoVO> grupoSanguineoVOS = repository.buscarMediaIdadePorTipoSanguineo();
+    log.info("Busca dmedia de idades por tipo sanguineo finalizado...");
+    return grupoSanguineoVOS;
   }
 
 }
