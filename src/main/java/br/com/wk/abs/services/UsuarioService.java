@@ -3,6 +3,7 @@ package br.com.wk.abs.services;
 import br.com.wk.abs.entities.Usuario;
 import br.com.wk.abs.enumerations.Genero;
 import br.com.wk.abs.vo.CandidatoVO;
+import br.com.wk.abs.vo.DoadorVO;
 import br.com.wk.abs.vo.FaixaEtariaVO;
 import br.com.wk.abs.vo.GrupoSanguineoVO;
 import java.math.BigDecimal;
@@ -20,5 +21,7 @@ public interface UsuarioService {
   Map<Genero, BigDecimal> buscarPercentualDeObesosPorGenero();
 
   List<GrupoSanguineoVO> buscarMediaIdadePorTipoSanguineo();
+
+  List<DoadorVO> buscarPossiveisDoadoresPorTipoSanguineo();
 
 }

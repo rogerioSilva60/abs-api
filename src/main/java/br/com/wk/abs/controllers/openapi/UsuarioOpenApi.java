@@ -2,6 +2,7 @@ package br.com.wk.abs.controllers.openapi;
 
 import br.com.wk.abs.controllers.dto.request.UsuarioRequestDTO;
 import br.com.wk.abs.controllers.dto.response.CandidatoResponseDTO;
+import br.com.wk.abs.controllers.dto.response.DoadorResponseDTO;
 import br.com.wk.abs.controllers.dto.response.FaixaEtariaResponseDTO;
 import br.com.wk.abs.controllers.dto.response.GrupoSanguineoResponseDTO;
 import br.com.wk.abs.enumerations.Genero;
@@ -113,4 +114,24 @@ public interface UsuarioOpenApi {
       }
   )
   ResponseEntity<List<GrupoSanguineoResponseDTO>> buscarMediaIdadeDoTipoSanguineo();
+
+  @Operation(summary = "Quantidade de possíveis doadores por grupo sanguíneo",
+      description = "Deve retornar a quantidade de possíveis doadores para um determinado grupo sanguíneo")
+  @ApiResponses(
+      value = {
+          @ApiResponse(
+              responseCode = "200", description = "Ok",
+              content = {
+                  @Content(
+                      mediaType = MediaType.APPLICATION_JSON_VALUE,
+                      array = @ArraySchema( schema = @Schema(implementation = DoadorResponseDTO.class))
+                  )
+              }
+          ),
+          @ApiResponse (
+              responseCode = "500", description = "Ocorreu erro interno", content = @Content
+          )
+      }
+  )
+  ResponseEntity<List<DoadorResponseDTO>> buscarPossiveiDoadoresPorTipoSanguineo();
 }

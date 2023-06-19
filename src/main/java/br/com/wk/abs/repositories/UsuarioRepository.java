@@ -2,6 +2,7 @@ package br.com.wk.abs.repositories;
 
 import br.com.wk.abs.entities.Usuario;
 import br.com.wk.abs.enumerations.Genero;
+import br.com.wk.abs.enumerations.TipoSanguineo;
 import br.com.wk.abs.repositories.queries.UsuarioRepositoryQuery;
 import br.com.wk.abs.vo.CandidatoVO;
 import br.com.wk.abs.vo.GrupoSanguineoVO;
@@ -32,6 +33,11 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long>, Usuario
   @Query("select new br.com.wk.abs.vo.GrupoSanguineoVO(u.tipoSanguineo, (sum(datediff(yy, u.dataNascimento, current_date)) / count(u.tipoSanguineo))) from Usuario u "
       + "group by u.tipoSanguineo order by u.tipoSanguineo asc")
   List<GrupoSanguineoVO> buscarMediaIdadePorTipoSanguineo();
+
+  @Query("select count(u) from Usuario u where u.tipoSanguineo in (?1) "
+      + "and datediff(yy, u.dataNascimento, current_date) between ?2 and ?3 and u.peso > ?4")
+  Long buscarTotalDoaresPorTipoSanguineo(List<TipoSanguineo> tipoSanguineos,
+      Integer menorIdade, Integer maiorIdade, Integer peso);
 
   @Query("select max(datediff(yy, u.dataNascimento, current_date)) as maior_idade from Usuario u")
   Integer buscarMaiorIdade();

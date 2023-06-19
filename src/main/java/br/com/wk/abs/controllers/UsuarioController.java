@@ -2,6 +2,7 @@ package br.com.wk.abs.controllers;
 
 import br.com.wk.abs.controllers.dto.request.UsuarioRequestDTO;
 import br.com.wk.abs.controllers.dto.response.CandidatoResponseDTO;
+import br.com.wk.abs.controllers.dto.response.DoadorResponseDTO;
 import br.com.wk.abs.controllers.dto.response.FaixaEtariaResponseDTO;
 import br.com.wk.abs.controllers.dto.response.GrupoSanguineoResponseDTO;
 import br.com.wk.abs.controllers.mapper.UsuarioMapper;
@@ -76,6 +77,15 @@ public class UsuarioController implements UsuarioOpenApi {
   public ResponseEntity<List<GrupoSanguineoResponseDTO>> buscarMediaIdadeDoTipoSanguineo() {
     List<GrupoSanguineoResponseDTO> grupos = service.buscarMediaIdadePorTipoSanguineo().stream()
         .map(mapper::toGrupoSanguineoResponseDTO)
+        .toList();
+    return ResponseEntity.ok(grupos);
+  }
+
+  @GetMapping("possiveis-doadores-por-grupo-sanguineo")
+  @Override
+  public ResponseEntity<List<DoadorResponseDTO>> buscarPossiveiDoadoresPorTipoSanguineo() {
+    List<DoadorResponseDTO> grupos = service.buscarPossiveisDoadoresPorTipoSanguineo().stream()
+        .map(mapper::toDoadorResponseDTO)
         .toList();
     return ResponseEntity.ok(grupos);
   }

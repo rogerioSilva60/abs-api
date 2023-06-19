@@ -2,10 +2,12 @@ package br.com.wk.abs.services.impl;
 
 import br.com.wk.abs.entities.Usuario;
 import br.com.wk.abs.enumerations.Genero;
+import br.com.wk.abs.enumerations.TipoSanguineo;
 import br.com.wk.abs.repositories.UsuarioRepository;
 import br.com.wk.abs.services.UsuarioService;
 import br.com.wk.abs.services.exceptions.NotFoundException;
 import br.com.wk.abs.vo.CandidatoVO;
+import br.com.wk.abs.vo.DoadorVO;
 import br.com.wk.abs.vo.FaixaEtariaVO;
 import br.com.wk.abs.vo.GrupoSanguineoVO;
 import br.com.wk.abs.vo.UsuarioImcVO;
@@ -112,4 +114,15 @@ public class UsuarioServiceImpl implements UsuarioService {
     return grupoSanguineoVOS;
   }
 
+  @Transactional(readOnly = true)
+  @Override
+  public List<DoadorVO> buscarPossiveisDoadoresPorTipoSanguineo() {
+    List<DoadorVO> grupos = new ArrayList<>();
+    for(TipoSanguineo tipoSanguineo : TipoSanguineo.values()) {
+      Long total = repository.buscarTotalDoaresPorTipoSanguineo(tipoSanguineo.gruposCompativeis(),
+          16, 69, 50);
+      grupos.add(new DoadorVO(tipoSanguineo, total));
+    }
+    return grupos;
+  }
 }

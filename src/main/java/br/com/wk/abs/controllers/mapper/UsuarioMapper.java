@@ -2,11 +2,13 @@ package br.com.wk.abs.controllers.mapper;
 
 import br.com.wk.abs.controllers.dto.request.UsuarioRequestDTO;
 import br.com.wk.abs.controllers.dto.response.CandidatoResponseDTO;
+import br.com.wk.abs.controllers.dto.response.DoadorResponseDTO;
 import br.com.wk.abs.controllers.dto.response.FaixaEtariaResponseDTO;
 import br.com.wk.abs.controllers.dto.response.GrupoSanguineoResponseDTO;
 import br.com.wk.abs.controllers.dto.response.UsuarioResponseDTO;
 import br.com.wk.abs.entities.Usuario;
 import br.com.wk.abs.vo.CandidatoVO;
+import br.com.wk.abs.vo.DoadorVO;
 import br.com.wk.abs.vo.FaixaEtariaVO;
 import br.com.wk.abs.vo.GrupoSanguineoVO;
 import org.mapstruct.Mapper;
@@ -35,4 +37,6 @@ public interface UsuarioMapper {
   FaixaEtariaResponseDTO toFaixaEtariaResponseDTO(FaixaEtariaVO faixaEtariaVO);
 
   GrupoSanguineoResponseDTO toGrupoSanguineoResponseDTO(GrupoSanguineoVO grupoSanguineoVO);
+
+  DoadorResponseDTO toDoadorResponseDTO(DoadorVO doadorVO);
 }
