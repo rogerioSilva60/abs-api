@@ -52,6 +52,9 @@ public interface UsuarioOpenApi {
               }
           ),
           @ApiResponse (
+              responseCode = "404", description = "Recurso não encontrado", content = @Content
+          ),
+          @ApiResponse (
               responseCode = "500", description = "Ocorreu erro interno", content = @Content
           )
       }
@@ -69,6 +72,9 @@ public interface UsuarioOpenApi {
                     array = @ArraySchema( schema = @Schema(implementation = FaixaEtariaResponseDTO.class))
                   )
               }
+          ),
+          @ApiResponse (
+              responseCode = "400", description = "Requisição inválida", content = @Content
           ),
           @ApiResponse (
               responseCode = "500", description = "Ocorreu erro interno", content = @Content
@@ -90,6 +96,9 @@ public interface UsuarioOpenApi {
               }
           ),
           @ApiResponse (
+              responseCode = "400", description = "Requisição inválida", content = @Content
+          ),
+          @ApiResponse (
               responseCode = "500", description = "Ocorreu erro interno", content = @Content
           )
       }
@@ -107,6 +116,9 @@ public interface UsuarioOpenApi {
                       array = @ArraySchema( schema = @Schema(implementation = GrupoSanguineoResponseDTO.class))
                   )
               }
+          ),
+          @ApiResponse (
+              responseCode = "404", description = "Recurso não encontrado", content = @Content
           ),
           @ApiResponse (
               responseCode = "500", description = "Ocorreu erro interno", content = @Content
@@ -127,6 +139,9 @@ public interface UsuarioOpenApi {
                       array = @ArraySchema( schema = @Schema(implementation = DoadorResponseDTO.class))
                   )
               }
+          ),
+          @ApiResponse (
+              responseCode = "400", description = "Requisição inválida", content = @Content
           ),
           @ApiResponse (
               responseCode = "500", description = "Ocorreu erro interno", content = @Content

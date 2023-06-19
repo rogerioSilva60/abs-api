@@ -45,17 +45,13 @@ public class UsuarioServiceImpl implements UsuarioService {
   @Transactional(readOnly = true)
   @Override
   public List<CandidatoVO> buscarAgrupadoPorEstado() {
-    try {
-      log.info("Busca dos candidatos agrupados por estado iniciado...");
-      List<CandidatoVO> candidatoVOS = repository.buscarAgrupadoPorEstado();
-      log.info("Busca dos candidatos agrupados por estado finalizado");
+    log.info("Busca dos candidatos agrupados por estado iniciado...");
+    List<CandidatoVO> candidatoVOS = repository.buscarAgrupadoPorEstado();
+    log.info("Busca dos candidatos agrupados por estado finalizado");
 
-      if(candidatoVOS.isEmpty()){ throw new NotFoundException("Candidatos não encontrado(s)"); }
+    if(candidatoVOS.isEmpty()){ throw new NotFoundException("Candidatos não encontrado(s)"); }
 
-      return candidatoVOS;
-    } catch (Exception e) {
-      throw new BusinessException("Ocorreu um erro ao buscar os candidados agrupado por estado");
-    }
+    return candidatoVOS;
   }
 
   @Transactional(readOnly = true)
@@ -129,14 +125,13 @@ public class UsuarioServiceImpl implements UsuarioService {
   @Transactional(readOnly = true)
   @Override
   public List<GrupoSanguineoVO> buscarMediaIdadePorTipoSanguineo() {
-    try{
-      log.info("Busca media de idades por tipo sanguineo iniciado...");
-      List<GrupoSanguineoVO> grupoSanguineoVOS = repository.buscarMediaIdadePorTipoSanguineo();
-      log.info("Busca media de idades por tipo sanguineo finalizado...");
-      return grupoSanguineoVOS;
-    } catch (Exception e) {
-      throw new BusinessException("Ocorreu um erro ao buscar a media de idade por grupo sanguíneo");
-    }
+    log.info("Busca media de idades por tipo sanguineo iniciado...");
+    List<GrupoSanguineoVO> grupoSanguineoVOS = repository.buscarMediaIdadePorTipoSanguineo();
+    log.info("Busca media de idades por tipo sanguineo finalizado...");
+
+    if(grupoSanguineoVOS.isEmpty()){ throw new NotFoundException("Media de idade por grupo sanguíneo não encontrado"); }
+
+    return grupoSanguineoVOS;
   }
 
   @Transactional(readOnly = true)
