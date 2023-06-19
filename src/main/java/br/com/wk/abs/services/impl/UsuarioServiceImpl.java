@@ -108,21 +108,26 @@ public class UsuarioServiceImpl implements UsuarioService {
   @Transactional(readOnly = true)
   @Override
   public List<GrupoSanguineoVO> buscarMediaIdadePorTipoSanguineo() {
-    log.info("Busca dmedia de idades por tipo sanguineo iniciado...");
+    log.info("Busca media de idades por tipo sanguineo iniciado...");
     List<GrupoSanguineoVO> grupoSanguineoVOS = repository.buscarMediaIdadePorTipoSanguineo();
-    log.info("Busca dmedia de idades por tipo sanguineo finalizado...");
+    log.info("Busca media de idades por tipo sanguineo finalizado...");
     return grupoSanguineoVOS;
   }
 
   @Transactional(readOnly = true)
   @Override
   public List<DoadorVO> buscarPossiveisDoadoresPorTipoSanguineo() {
+    log.info("Busca quantidade possiveis de doadores por tipo sanguineo iniciado...");
+    Integer menorIdade = 16;
+    Integer maiorIdade = 69;
+    Integer peso = 50;
     List<DoadorVO> grupos = new ArrayList<>();
     for(TipoSanguineo tipoSanguineo : TipoSanguineo.values()) {
       Long total = repository.buscarTotalDoaresPorTipoSanguineo(tipoSanguineo.gruposCompativeis(),
-          16, 69, 50);
+          menorIdade, maiorIdade, peso);
       grupos.add(new DoadorVO(tipoSanguineo, total));
     }
+    log.info("Busca quantidade possiveis de doadores por tipo sanguineo finalizado...");
     return grupos;
   }
 }
