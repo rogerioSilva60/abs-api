@@ -4,11 +4,13 @@ import br.com.wk.abs.entities.Endereco;
 import br.com.wk.abs.entities.Usuario;
 import br.com.wk.abs.enumerations.Genero;
 import br.com.wk.abs.enumerations.TipoSanguineo;
+import br.com.wk.abs.vo.CandidatoVO;
 import java.time.LocalDate;
 import java.util.List;
 
 public abstract class UsuarioMother {
 
+  public static final int INDEX = 0;
   private static final long ID = 1L;
   private static final String NOME = "Milena Analu Pires";
   private static final String CPF = "775.256.099-50";
@@ -29,9 +31,13 @@ public abstract class UsuarioMother {
   private static final Double ALTURA = 1.53;
   private static final Integer PESO = 80;
   private static final TipoSanguineo TIPO_SANGUINEO = TipoSanguineo.O_NEGATIVO;
+  public static final long CANDIDATO_TOTAL = 2;
+  public static final String CANDIDATO_ESTADO = ESTADO;
   public static Usuario usuario;
   public static Endereco endereco;
   public static List<Usuario> usuarios;
+  public static CandidatoVO candidatoVO;
+  public static List<CandidatoVO> candidatoVOS;
 
   public static void startUsuario() {
     endereco = new Endereco();
@@ -60,5 +66,11 @@ public abstract class UsuarioMother {
     usuario.setTipoSanguineo(TIPO_SANGUINEO);
 
     usuarios = List.of(usuario);
+  }
+
+  public static void startCandidatoVo() {
+    candidatoVO = new CandidatoVO(CANDIDATO_TOTAL, CANDIDATO_ESTADO);
+
+    candidatoVOS = List.of(candidatoVO);
   }
 }
