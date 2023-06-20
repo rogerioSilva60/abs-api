@@ -19,6 +19,7 @@
 		<lombok.version>1.18.24</lombok.version>
 		<springdoc.version>1.7.0</springdoc.version>
 		<mysql.version>8.0.29</mysql.version>
+		<flyway-core.version>5.2.4</flyway-core.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -38,6 +39,7 @@
 		<dependency>
 			<groupId>org.flywaydb</groupId>
 			<artifactId>flyway-core</artifactId>
+			<version>${flyway-core.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.flywaydb</groupId>
